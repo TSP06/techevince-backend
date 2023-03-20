@@ -6,6 +6,7 @@ const cors = require("cors");
 const mongoose = require('mongoose');
 const { apiRouter } = require("./api");
 const { errorHandler } = require("./utils/error_handler")
+const passport = require("passport");
 
 // Create an Express Application
 const app = express();
@@ -17,6 +18,8 @@ app.use(cors());
 require("./passport/passport.js");
 require("./database/session.js")(app);
 
+app.use(passport.initialize());
+app.use(passport.session());
 // Routes
 app.use("/api", apiRouter);
 
@@ -30,7 +33,7 @@ app.use(errorHandler);
 
 // Start the server
 const server = app.listen(process.env.PORT, async () => {
-  const mongoUri = process.env.MONGODB_URI;
+  const mongoUri = process.env.MONGO_URL;
   try {
     await mongoose.connect(mongoUri);
   } catch (err) {

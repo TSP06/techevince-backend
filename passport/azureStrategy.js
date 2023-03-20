@@ -1,5 +1,6 @@
 const AzureStrategy = require("passport-azure-ad-oauth2").Strategy;
-const { User } = require("../model");
+const { User } = require("../model/user.schema");
+const jwt = require("jsonwebtoken");
 
 const azureStrategy = new AzureStrategy(
   {
@@ -12,17 +13,22 @@ const azureStrategy = new AzureStrategy(
   },
   async (accessToken, refreshToken, params, profile, done) => {
     try {
-      const user = await User.findOne({ email: profile.emails[0].value });
+      const decoded = jwt.decode(accessToken);
+      const obj = {
+        name: decoded.name,
+        rollno: decoded.family_name,
+        email: decoded.unique_name,
+        accessToken,
+        refreshToken,
+      }
+      const user = await User.findOne({ email: obj.email});
       if (user) {
+        user.accessToken = accessToken;
+        user.refreshToken = refreshToken;
+        await user.save();
         done(null, user);
       } else {
-        const newUser = new User({
-          name: profile.displayName,
-          rollno: profile._json.rollno,
-          email: profile.emails[0].value,
-          accessToken: accessToken,
-          refreshToken: refreshToken,
-        });
+        const newUser = new User(obj);
         await newUser.save();
         done(null, newUser);
       }

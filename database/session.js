@@ -1,7 +1,7 @@
 // setup express-session using mongoose
 
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 
 module.exports = app => {
@@ -13,8 +13,8 @@ module.exports = app => {
       cookie: {
         maxAge: 24 * 60 * 60 * 1000
       },
-      store: new MongoStore({
-        mongooseConnection: mongoose.connection,
+      store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URL,
         ttl: 24 * 60 * 60
       })
     })

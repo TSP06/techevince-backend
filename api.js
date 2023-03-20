@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-// const { authRouter } = require("./routes/auth");
+const { authRouter } = require("./routes/auth");
 // const { votesRouter } = require("./routes/user");
 // const { projectRouter } = require("./routes/project");
 // const { teamRouter } = require("./routes/team");
@@ -8,7 +8,7 @@ const router = require('express').Router();
 // const { uploadRouter } = require("./routes/upload");
 // const { judgesRouter } = require("./routes/judges");
 // // Routes
-// router.use("/auth", authRouter);
+router.use("/auth", authRouter);
 // router.use("/votes", votesRouter);
 // router.use("/project", projectRouter);
 // router.use("/team", teamRouter);
