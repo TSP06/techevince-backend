@@ -1,6 +1,12 @@
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-const { Users } = require('../models');
 dotenv.config();
 
-module.exports = { verifyAccessToken };
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/api/auth/login');
+}
+
+module.exports = { ensureAuthenticated };

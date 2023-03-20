@@ -1,13 +1,6 @@
 const router = require('express').Router();
-const { } = require('../controllers/auth');
 const passport = require('passport');
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/api/auth/login');
-}
+const { ensureAuthenticated } = require('../utils/auth');
 
 router.get('/current', ensureAuthenticated, (req, res) => {
   return res.send(req.user);

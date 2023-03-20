@@ -5,7 +5,8 @@ const ObjectId = Schema.Types.ObjectId;
 const GallerySchema = new Schema({
   alt: String,
   link: String,
-  order: Number,
+  orderBy: Number,
+  useCase: String,
 });
 
 module.exports = mongoose.model('Gallery', GallerySchema);

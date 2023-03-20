@@ -9,6 +9,7 @@ const ProjectSchema = new Schema({
   category: String,
   teamMembers: [String],
   links: [String],
+  images: [String],
   club: ObjectId
 });
 
