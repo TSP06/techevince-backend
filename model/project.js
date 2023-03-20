@@ -10,7 +10,10 @@ const ProjectSchema = new Schema({
   teamMembers: [String],
   links: [String],
   images: [String],
-  club: ObjectId
+  club: {
+    type: ObjectId,
+    ref: 'Club'
+  }
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);

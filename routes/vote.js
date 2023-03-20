@@ -6,9 +6,12 @@ const voteRouter = require('express').Router();
 
 voteRouter.post('/', ensureAuthenticated, async (req, res) => {
   const body = req.body;
-  const user = await User.findOne({ username: req.user.email });
+  const user = await User.findOne({ email: req.user.email });
   const project = await Project.findById(body.projectId);
   const category = project.category;
+
+  if(!user)
+    return res.json({ success: false, message: 'User not found' });
 
   if (category === 'software') {
     user.softwareVote = body.projectId;

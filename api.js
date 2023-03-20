@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const { authRouter } = require("./routes/auth");
-// const { votesRouter } = require("./routes/user");
+const { voteRouter } = require("./routes/vote");
 const { projectRouter } = require("./routes/project");
 const { teamRouter } = require("./routes/team");
 const { galleryRouter } = require("./routes/gallery");
@@ -9,7 +9,7 @@ const { galleryRouter } = require("./routes/gallery");
 const { judgeRouter } = require("./routes/judges");
 // // Routes
 router.use("/auth", authRouter);
-// router.use("/votes", votesRouter);
+router.use("/vote", voteRouter);
 router.use("/project", projectRouter);
 router.use("/team", teamRouter);
 router.use("/gallery", galleryRouter);

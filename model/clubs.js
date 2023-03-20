@@ -4,8 +4,7 @@ const ObjectId = Schema.Types.ObjectId;
 
 const ClubSchema = new Schema({
   name: String,
-  icons: [String],
-  projects: [ObjectId],
+  icons: String,
   description: String,
   links: [String]
 });
