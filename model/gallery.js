@@ -7,3 +7,5 @@ const GallerySchema = new Schema({
   link: String,
   order: Number,
 });
+
+module.exports = mongoose.model('Gallery', GallerySchema);

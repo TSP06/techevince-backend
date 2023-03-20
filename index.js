@@ -12,17 +12,18 @@ const passport = require("passport");
 const app = express();
 
 app.use(morgan("dev"));
+const sessionStorage = require("./database/session.js")(app);
+app.use("/admin", require("./admin/admin-bro.js").router(sessionStorage));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 require("./passport/passport.js");
-require("./database/session.js")(app);
 
 app.use(passport.initialize());
 app.use(passport.session());
 // Routes
+require("./admin/admin-bro.js").router(app);
 app.use("/api", apiRouter);
-
 // 404 handler
 app.use("*", (req, res, next) => {
   res.status(404).json({ data: null, error: { message: "No such API exist", status: 404 }, message: "Not Found" });
