@@ -1,9 +1,17 @@
 const router = require("express").Router();
 const passport = require("passport");
 const { ensureAuthenticated } = require("../utils/auth");
+const { User } = require("../model/user.schema");
 
-router.get("/current", ensureAuthenticated, (req, res) => {
-  return res.send(req.user);
+router.get("/current", ensureAuthenticated, async (req, res) => {
+  const user = req.user;
+  const mongoUser = await User.findOne({ email: user.email });
+  if (!mongoUser) {
+    return res.send({
+      message: "User not found",
+    });
+  }
+  return res.send(mongoUser);
 });
 
 router.get("/azureadoauth2", passport.authenticate("azure"));
