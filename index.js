@@ -16,7 +16,10 @@ const sessionStorage = require("./database/session.js")(app);
 app.use("/admin", require("./admin/admin-bro.js").router(sessionStorage));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 require("./passport/passport.js");
 
 app.use(passport.initialize());
