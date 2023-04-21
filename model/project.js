@@ -8,7 +8,10 @@ const ProjectSchema = new Schema({
   booth: String,
   category: String,
   teamMembers: [String],
-  links: [String],
+  links: [{
+    name: String,
+    link: String
+  }],
   images: [String],
   club: {
     type: ObjectId,

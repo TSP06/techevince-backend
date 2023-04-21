@@ -27,4 +27,26 @@ voteRouter.post('/', ensureAuthenticated, async (req, res) => {
   res.json({ success: true, user });
 });
 
+voteRouter.delete('/', ensureAuthenticated, async (req, res) => {
+  const body = req.body;
+  const user = await User.findOne({ email: req.user.email });
+  const category = body.category;
+
+  if(!user)
+    return res.json({ success: false, message: 'User not found' });
+
+  if (category === 'software') {
+    user.softwareVote = null;
+    await user.save();
+  } else if (category === 'hardware') {
+    user.hardwareVote = null;
+    await user.save();
+  } else if (category === 'business') {
+    user.businessVote = null;
+    await user.save();
+  }
+
+  res.json({ success: true, user });
+});
+
 module.exports.voteRouter = voteRouter;

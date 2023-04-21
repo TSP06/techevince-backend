@@ -7,8 +7,14 @@ const JudgeSchema = new Schema({
   designation: String,
   company: String,
   image: String,
-  links: [String],
-  description: String,
+  socials: [{
+    name: String,
+    link: String
+  }],
+  description: [{
+    title: String,
+    description: String
+  }],
 });
 
 module.exports = mongoose.model('Judge', JudgeSchema);

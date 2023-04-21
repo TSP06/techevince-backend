@@ -14,7 +14,7 @@ router.get('/azureadoauth2/callback',
   function (req, res) {
     // Successful authentication, redirect home.
 
-    res.send(req.user);
+    res.redirect("back");
   });
 
 router.use((req, res, next) => {

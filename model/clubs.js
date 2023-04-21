@@ -6,7 +6,10 @@ const ClubSchema = new Schema({
   name: String,
   icons: String,
   description: String,
-  links: [String]
+  links: [{
+    name: String,
+    link: String
+  }]
 });
 
 module.exports = mongoose.model('Club', ClubSchema);
