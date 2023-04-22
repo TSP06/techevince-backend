@@ -11,11 +11,12 @@ const Projects = require('../model/project');
 const Teams = require('../model/teams');
 const { User } = require('../model/user.schema');
 const Admin = require('../model/admin');
+const Perm = require('../model/perm');
 
 // add authentication
 
 const adminJS = new AdminJS({
-  resources: [Clubs, Gallery, Judges, Projects, Teams, User, Admin],
+  resources: [Clubs, Gallery, Judges, Projects, Teams, User, Admin, Perm],
   rootPath: '/admin',
   loginPath: '/admin/login',
   logoutPath: '/admin/logout',
