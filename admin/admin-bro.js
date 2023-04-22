@@ -31,8 +31,6 @@ const authenticate = async (email, password) => {
   const admin = await AdminModel.findOne({ username: email });
   console.log(admin);
   if (admin) {
-    console.log(admin.password);
-    console.log(password);
     const matched = await bcrypt.compare(password, admin.password);
     if (matched) {
       return admin
