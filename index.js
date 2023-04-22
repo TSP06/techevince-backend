@@ -17,7 +17,7 @@ app.use("/admin", require("./admin/admin-bro.js").router(sessionStorage));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: process.env.REDIRECT_URL,
   credentials: true
 }));
 require("./passport/passport.js");
