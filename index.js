@@ -16,6 +16,7 @@ const sessionStorage = require("./database/session.js")(app);
 app.use("/admin", require("./admin/admin-bro.js").router(sessionStorage));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 app.use(
   cors({
     origin: [

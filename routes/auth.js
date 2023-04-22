@@ -29,7 +29,7 @@ router.get(
       secure: false,
     });
 
-    res.redirect("http://localhost:5173/redirect");
+    res.redirect(process.env.REDIRECT_URL_FRONTEND);
   }
 );
 
