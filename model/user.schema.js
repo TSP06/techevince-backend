@@ -8,9 +8,18 @@ const userSchema = new Schema({
   email: String,
   accessToken: String,
   refreshToken: String,
-  businessVote: ObjectId,
-  softwareVote: ObjectId,
-  hardwareVote: ObjectId,
+  businessVote: {
+    type: ObjectId,
+    ref: 'Project',
+  },
+  softwareVote: {
+    type: ObjectId,
+    ref: 'Project',
+  },
+  hardwareVote: {
+    type: ObjectId,
+    ref: 'Project',
+  },
 });
 
 module.exports.User = mongoose.model('User', userSchema);
